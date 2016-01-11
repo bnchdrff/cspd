@@ -2,10 +2,10 @@
 /* global Meteor, React, ReactMeteorData, Roles */
 'use strict';
 
-import { _, ReactBootstrap, ReactRouterBootstrap, Router, moment } from 'app-deps';
+import { _, ReactBootstrap, ReactRouterBootstrap, ReactRouter, moment } from 'app-deps';
 
 let { Navbar, CollapsibleNav, Nav, NavItem, DropdownButton, MenuItem } = ReactBootstrap;
-let { Link } = Router;
+let { Link } = ReactRouter;
 let { NavItemLink, MenuItemLink } = ReactRouterBootstrap;
 
 // Meteor components for navigation. Uses ReactBootstrap and
@@ -13,7 +13,7 @@ let { NavItemLink, MenuItemLink } = ReactRouterBootstrap;
 
 export default React.createClass({
   displayName: 'TopNav',
-  mixins: [ ReactMeteorData, Router.Navigation ],
+  mixins: [ ReactMeteorData, ReactRouter.Navigation ],
 
   getMeteorData() {
     // Reactive data fetch for Meteor user data. Requires `ReactMeteorData` mixin.

@@ -10,6 +10,7 @@ import FittedTable from 'client/components/fittedtable';
 import { Patients } from 'lib/models/patient';
 
 import NewPatientButton from 'client/components/newpatientbutton';
+import EditableDateCell from 'client/components/editabledatecell';
 
 let { ButtonToolbar } = ReactBootstrap;
 

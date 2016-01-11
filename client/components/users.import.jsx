@@ -2,9 +2,9 @@
 /* global Meteor, React, ReactDOM, Blaze, Template */
 'use strict';
 
-import { _, Router, ReactBootstrap } from 'app-deps';
+import { _, ReactRouter, ReactBootstrap } from 'app-deps';
 
-let { Link } = Router;
+let { Link } = ReactRouter;
 let { Alert, Input, Button } = ReactBootstrap;
 
 // React components for managing users
@@ -56,7 +56,7 @@ export let ManageUsers = React.createClass({
 
 export let CreateUser = React.createClass({
   displayName: 'CreateUser',
-  mixins: [ React.addons.LinkedStateMixin, Router.Navigation ],
+  mixins: [ React.addons.LinkedStateMixin, ReactRouter.Navigation ],
 
   getInitialState() {
     return {

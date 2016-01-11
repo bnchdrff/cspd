@@ -4,8 +4,6 @@
 
 import  { bootbox, ReactBootstrap } from 'app-deps';
 
-import Loading from 'client/components/loading';
-
 import { Patients } from 'lib/models/patient';
 
 let { Button } = ReactBootstrap;

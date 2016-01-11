@@ -2,10 +2,10 @@
 /* global Meteor, React */
 'use strict';
 
-import { _, Router } from 'app-deps';
+import { _, ReactRouter } from 'app-deps';
 import TopNav from 'client/components/navigation';
 
-let { RouteHandler } = Router;
+let { RouteHandler } = ReactRouter;
 
 // The top-level App React component. It uses `<RouteHandler />` from
 // ReactRouter to render whichever page corresponds to the current URL.

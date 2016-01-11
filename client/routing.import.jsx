@@ -2,7 +2,7 @@
 /* global Meteor, React, ReactDOM */
 'use strict';
 
-import { _, Router } from 'app-deps';
+import { _, history, ReactRouter } from 'app-deps';
 
 import { Login, ResetPassword, EnrollAccount, ChangePassword } from 'client/components/login';
 import { AdminUsers, CreateUser } from 'client/components/users';
@@ -10,7 +10,9 @@ import { AdminUsers, CreateUser } from 'client/components/users';
 import App from 'client/components/app';
 import Home from 'client/components/home';
 
-let { Route, DefaultRoute } = Router;
+let { Router, Route, DefaultRoute } = ReactRouter;
+
+let { createHistory } = history;
 
 // On startup, let the router take over the `main` div in the markup.
 
@@ -39,12 +41,6 @@ Meteor.startup(() => {
     </Route>
   ];
 
-  let router = Router.create({
-    routes,
-    location: Router.HistoryLocation
-  });
+  ReactDOM.render(<Router history={createHistory()}>{routes}</Router>, document.getElementById('main'))
 
-  router.run((Root, state) => {
-    ReactDOM.render(<Root />, document.getElementById('main'));
-  });
 });

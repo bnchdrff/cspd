@@ -2,16 +2,16 @@
 /* global Meteor, React, Accounts */
 'use strict';
 
-import { _, Router, ReactBootstrap } from 'app-deps';
+import { _, ReactRouter, ReactBootstrap } from 'app-deps';
 
 let { Alert, Input, Button } = ReactBootstrap;
-let { Link } = Router;
+let { Link } = ReactRouter;
 
 // React components for login flows
 
 export let Login = React.createClass({
   displayName: 'Login',
-  mixins: [ React.addons.LinkedStateMixin, Router.Navigation ],
+  mixins: [ React.addons.LinkedStateMixin, ReactRouter.Navigation ],
 
   getInitialState() {
     return {
@@ -88,7 +88,7 @@ export let Login = React.createClass({
 
 export let ResetPassword = React.createClass({
   displayName: 'ResetPassword',
-  mixins: [ React.addons.LinkedStateMixin, Router.State, Router.Navigation ],
+  mixins: [ React.addons.LinkedStateMixin, ReactRouter.State, ReactRouter.Navigation ],
 
   getInitialState() {
     return {
@@ -140,7 +140,7 @@ export let ResetPassword = React.createClass({
 
 export let EnrollAccount = React.createClass({
   displayName: 'ResetPassword',
-  mixins: [ React.addons.LinkedStateMixin, Router.State, Router.Navigation ],
+  mixins: [ React.addons.LinkedStateMixin, ReactRouter.State, ReactRouter.Navigation ],
 
   getInitialState() {
     return {
@@ -192,7 +192,7 @@ export let EnrollAccount = React.createClass({
 
 export let ChangePassword = React.createClass({
   displayName: 'ChangePassword',
-  mixins: [ React.addons.LinkedStateMixin, Router.Navigation ],
+  mixins: [ React.addons.LinkedStateMixin, ReactRouter.Navigation ],
 
   getInitialState() {
     return {
