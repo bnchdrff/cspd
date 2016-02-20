@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.patient.patient
+    - field.storage.patient.field_maps
+  module:
+    - datetime
+id: patient.patient.field_maps
+field_name: field_maps
+entity_type: patient
+bundle: patient
+label: MAPS
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.patient.patient
+    - field.storage.patient.field_patient_number
+id: patient.patient.field_patient_number
+field_name: field_patient_number
+entity_type: patient
+bundle: patient
+label: 'Patient number'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

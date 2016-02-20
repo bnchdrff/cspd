@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.patient.patient
+    - field.storage.patient.field_opioid_risk_tool
+  module:
+    - datetime
+id: patient.patient.field_opioid_risk_tool
+field_name: field_opioid_risk_tool
+entity_type: patient
+bundle: patient
+label: 'Opioid risk tool'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

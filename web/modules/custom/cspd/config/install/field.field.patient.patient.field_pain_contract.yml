@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.patient.patient
+    - field.storage.patient.field_pain_contract
+  module:
+    - datetime
+id: patient.patient.field_pain_contract
+field_name: field_pain_contract
+entity_type: patient
+bundle: patient
+label: 'Pain contract'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - eck.eck_type.patient.patient
+    - field.storage.patient.field_urine_drug_screen
+  module:
+    - datetime
+id: patient.patient.field_urine_drug_screen
+field_name: field_urine_drug_screen
+entity_type: patient
+bundle: patient
+label: 'Urine drug screen'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime
