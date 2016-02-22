@@ -1,0 +1,99 @@
+<?php
+
+/**
+ * @file
+ * cspd_pseudofields.module
+ */
+
+/**
+ * Implements hook_entity_extra_field_info().
+ *
+ * Add special fields for MAPS & urine test status.
+ */
+function cspd_pseudofields_entity_extra_field_info() {
+  $extra = [];
+
+  $extra['patient']['patient']['display']['due_for_maps'] = [
+    'label' => t('Due for MAPS'),
+    'description' => t('Last MAPS was more than a year ago'),
+    'weight' => 100,
+    'visible' => TRUE,
+  ];
+
+  $extra['patient']['patient']['display']['due_for_urine_drug_screen'] = [
+    'label' => t('Due for urine drug screen'),
+    'description' => t('Less than two urine drug screens during the past year'),
+    'weight' => 100,
+    'visible' => TRUE,
+  ];
+
+  return $extra;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ *
+ * Provide values for special fields for MAPS & urine test status.
+ */
+function cspd_pseudofields_patient_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode, $langcode) {
+  if ($display->getComponent('due_for_maps')) {
+    $latest_maps = _get_nth_latest_unixtime_in_field($entity->get('field_maps')->getIterator());
+
+    if ($latest_maps < strtotime('1 year ago')) {
+      $markup = '<strong>Latest MAPS was more than a year ago.</strong>';
+    }
+    else {
+      $markup = 'Latest MAPS was within the past year.';
+    }
+
+    $build['due_for_maps'] = [
+      '#type' => 'markup',
+      '#markup' => $markup,
+    ];
+  }
+
+  if ($display->getComponent('due_for_urine_drug_screen')) {
+    $second_latest_urine_drug_screen = _get_nth_latest_unixtime_in_field($entity->get('field_urine_drug_screen')->getIterator(), 1);
+
+    if ($second_latest_urine_drug_screen < strtotime('1 year ago')) {
+      $markup = '<strong>Not enough urine drug screens during the past year.</strong>';
+    }
+    else {
+      $markup = 'At least two urine drug screens during the past year.';
+    }
+
+    $build['due_for_urine_drug_screen'] = [
+      '#type' => 'markup',
+      '#markup' => $markup,
+    ];
+  }
+}
+
+/**
+ * Return the nth latest date in a field list.
+ *
+ * @param ArrayIterator $iterator
+ *   A FieldItemList iterator with dates.
+ * @param int $nth
+ *   The position of the date you want.
+ *
+ * @return int
+ *   A unix timestamp, or 0 if there isn't one.
+ */
+function _get_nth_latest_unixtime_in_field(ArrayIterator $iterator, $nth = 0) {
+  $sorted_unixtimes = [];
+
+  foreach ($iterator as $date_field) {
+    $sorted_unixtimes[] = strtotime($date_field->value);
+  }
+
+  sort($sorted_unixtimes);
+
+  $sorted_unixtimes = array_reverse($sorted_unixtimes);
+
+  if (!array_key_exists($nth, $sorted_unixtimes)) {
+    return 0;
+  }
+
+  return $sorted_unixtimes[$nth];
+}

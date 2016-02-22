@@ -1,0 +1,8 @@
+name: cspd_pseudofields
+description: provide some pseudo-fields for cspd patient entities
+package: cspd
+type: module
+core: 8.x
+dependencies:
+  - cspd
+version: 8.x-1.0
