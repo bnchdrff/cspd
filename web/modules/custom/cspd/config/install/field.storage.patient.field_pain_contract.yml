@@ -4,6 +4,8 @@ dependencies:
   module:
     - datetime
     - eck
+_core:
+  default_config_hash: oOMHotRsWKlZ2aOitMXOxfh7fuSnuem7gqcsVVusKv8
 id: patient.field_pain_contract
 field_name: field_pain_contract
 entity_type: patient

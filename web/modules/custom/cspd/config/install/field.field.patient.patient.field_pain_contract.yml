@@ -6,6 +6,8 @@ dependencies:
     - field.storage.patient.field_pain_contract
   module:
     - datetime
+_core:
+  default_config_hash: l13VOAVRq6U6ILquPLd-c-wLZIRa13g4DL2KXZnS2iY
 id: patient.patient.field_pain_contract
 field_name: field_pain_contract
 entity_type: patient

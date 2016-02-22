@@ -6,6 +6,8 @@ dependencies:
     - field.storage.patient.field_opioid_risk_tool
   module:
     - datetime
+_core:
+  default_config_hash: IuGiO4AZdUPuvPCJ3g6ZZaqTLAOY1J3pBmWxvFzUmtc
 id: patient.patient.field_opioid_risk_tool
 field_name: field_opioid_risk_tool
 entity_type: patient

@@ -4,6 +4,8 @@ dependencies:
   module:
     - datetime
     - eck
+_core:
+  default_config_hash: 7sRwH1utplqnQbE6HnGOz2hRWBEtvk5I1Sj8qOxRHIA
 id: patient.field_opioid_risk_tool
 field_name: field_opioid_risk_tool
 entity_type: patient

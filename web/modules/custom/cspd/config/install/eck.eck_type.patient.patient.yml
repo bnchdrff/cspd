@@ -3,6 +3,8 @@ status: true
 dependencies:
   config:
     - eck.eck_entity_type.patient
+_core:
+  default_config_hash: xrW5I6qzmBhNUJ5MA6YBxc5FfdokIjs9IEGvTPlwBMQ
 name: Patient
 type: patient
 description: ''

@@ -1,16 +1,1 @@
-required:
-  - eck.eck_type.patient.patient
-  - eck.eck_entity_type.patient
-  - core.entity_form_display.patient.patient.default
-  - core.entity_view_display.patient.patient.default
-  - field.field.patient.patient.field_maps
-  - field.field.patient.patient.field_opioid_risk_tool
-  - field.field.patient.patient.field_pain_contract
-  - field.field.patient.patient.field_patient_number
-  - field.field.patient.patient.field_urine_drug_screen
-  - field.storage.patient.field_maps
-  - field.storage.patient.field_opioid_risk_tool
-  - field.storage.patient.field_pain_contract
-  - field.storage.patient.field_patient_number
-  - field.storage.patient.field_urine_drug_screen
-  - views.view.patients
+true

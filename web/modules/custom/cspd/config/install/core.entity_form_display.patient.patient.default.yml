@@ -10,6 +10,8 @@ dependencies:
     - field.field.patient.patient.field_urine_drug_screen
   module:
     - datetime
+_core:
+  default_config_hash: MZauxyteiV_PNnOY5vnfJ_SJnemEmsyLHBSGsdf9-8I
 id: patient.patient.default
 targetEntityType: patient
 bundle: patient

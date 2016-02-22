@@ -1,6 +1,12 @@
 name: cspd
+package: cspd
 type: module
 core: 8.x
 dependencies:
+  - cspd
+  - datetime
+  - eck
+  - field
   - system
+  - views
 version: 8.x-1.0

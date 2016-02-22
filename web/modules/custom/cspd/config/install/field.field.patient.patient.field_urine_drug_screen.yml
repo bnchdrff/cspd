@@ -6,6 +6,8 @@ dependencies:
     - field.storage.patient.field_urine_drug_screen
   module:
     - datetime
+_core:
+  default_config_hash: Kp0O-0NLXfwOwWdesnVQj7cTz6cDMZmElodpVh4Zrts
 id: patient.patient.field_urine_drug_screen
 field_name: field_urine_drug_screen
 entity_type: patient

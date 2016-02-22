@@ -1,6 +1,8 @@
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: E0c6o515kGffuCSnxCmpaKsdFw-108xpMOgVV-y7fBA
 id: patient
 label: patient
 created: true

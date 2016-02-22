@@ -6,6 +6,8 @@ dependencies:
     - field.storage.patient.field_maps
   module:
     - datetime
+_core:
+  default_config_hash: 2Hq4NyFJJdb2_O4jT1ZaJ7u4g8nDOjLEqIbTFaP98Bs
 id: patient.patient.field_maps
 field_name: field_maps
 entity_type: patient
