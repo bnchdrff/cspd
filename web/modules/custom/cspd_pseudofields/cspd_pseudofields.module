@@ -22,7 +22,7 @@ function cspd_pseudofields_entity_extra_field_info() {
 
   $extra['patient']['patient']['display']['due_for_urine_drug_screen'] = [
     'label' => t('Due for urine drug screen'),
-    'description' => t('Less than two urine drug screens during the past year'),
+    'description' => t('Less than two urine drug screens this year'),
     'weight' => 100,
     'visible' => TRUE,
   ];
@@ -56,10 +56,10 @@ function cspd_pseudofields_patient_view(array &$build, EntityInterface $entity, 
     $second_latest_urine_drug_screen = _get_nth_latest_unixtime_in_field($entity->get('field_urine_drug_screen')->getIterator(), 1);
 
     if ($second_latest_urine_drug_screen < strtotime('1 year ago')) {
-      $markup = '<strong>Not enough urine drug screens during the past year.</strong>';
+      $markup = '<strong>Not enough urine drug screens this year.</strong>';
     }
     else {
-      $markup = 'At least two urine drug screens during the past year.';
+      $markup = 'At least two urine drug screens this year.';
     }
 
     $build['due_for_urine_drug_screen'] = [
@@ -96,4 +96,43 @@ function _get_nth_latest_unixtime_in_field(ArrayIterator $iterator, $nth = 0) {
   }
 
   return $sorted_unixtimes[$nth];
+}
+
+/**
+ * Implements hook_query_TAG_alter().
+ *
+ * Only include patients who haven't had two drug screens this year.
+ */
+function cspd_pseudofields_query_need_urine_drug_screen_alter(Drupal\Core\Database\Query\AlterableInterface $query) {
+  // For use in the second-latest query, find the most recent dates.
+  $latest = db_select('patient__field_urine_drug_screen', 'latest');
+  $latest
+    ->addField('latest', 'entity_id', 'id');
+  $latest
+    ->addExpression('MAX(latest.field_urine_drug_screen_value)', 'latestdate');
+  $latest
+    ->groupBy('id');
+
+  // Now, find the second-latest dates.
+  $secondlatest = db_select('patient__field_urine_drug_screen', 'secondlatest');
+  $secondlatest
+    ->addField('secondlatest', 'entity_id', 'id');
+  $secondlatest
+    ->leftJoin($latest, 'latest', 'secondlatest.entity_id=latest.id');
+  $secondlatest
+    ->where('secondlatest.field_urine_drug_screen_value < latest.latestdate');
+
+  $secondlatest
+    ->addExpression('MAX(secondlatest.field_urine_drug_screen_value)', 'secondlatestdate');
+  $secondlatest
+    ->groupBy('secondlatest.entity_id');
+
+  $query
+    ->leftJoin($secondlatest, 'sl', 'patient_field_data.id=sl.id');
+
+  $notthisyear_or_null = $query->orConditionGroup()
+    ->condition('sl.secondlatestdate', date('Y') . '-01-01', '<')
+    ->isNull('sl.secondlatestdate');
+
+  $query->condition($notthisyear_or_null);
 }
