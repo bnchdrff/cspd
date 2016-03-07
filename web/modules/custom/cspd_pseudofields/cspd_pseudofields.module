@@ -15,7 +15,7 @@ function cspd_pseudofields_entity_extra_field_info() {
 
   $extra['patient']['patient']['display']['due_for_maps'] = [
     'label' => t('Due for MAPS'),
-    'description' => t('Last MAPS was more than a year ago'),
+    'description' => t('No MAPS this year'),
     'weight' => 100,
     'visible' => TRUE,
   ];
@@ -39,8 +39,8 @@ function cspd_pseudofields_patient_view(array &$build, EntityInterface $entity, 
   if ($display->getComponent('due_for_maps')) {
     $latest_maps = _get_nth_latest_unixtime_in_field($entity->get('field_maps')->getIterator());
 
-    if ($latest_maps < strtotime('1 year ago')) {
-      $markup = '<strong>Latest MAPS was more than a year ago.</strong>';
+    if ($latest_maps < strtotime(date('Y') . '-01-01')) {
+      $markup = '<strong>No MAPS this year.</strong>';
     }
     else {
       $markup = 'Latest MAPS was within the past year.';
@@ -55,7 +55,7 @@ function cspd_pseudofields_patient_view(array &$build, EntityInterface $entity, 
   if ($display->getComponent('due_for_urine_drug_screen')) {
     $second_latest_urine_drug_screen = _get_nth_latest_unixtime_in_field($entity->get('field_urine_drug_screen')->getIterator(), 1);
 
-    if ($second_latest_urine_drug_screen < strtotime('1 year ago')) {
+    if ($second_latest_urine_drug_screen < strtotime(date('Y') . '-01-01')) {
       $markup = '<strong>Not enough urine drug screens this year.</strong>';
     }
     else {
