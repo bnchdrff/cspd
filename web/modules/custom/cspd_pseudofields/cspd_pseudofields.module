@@ -35,7 +35,7 @@ function cspd_pseudofields_entity_extra_field_info() {
  *
  * Provide values for special fields for MAPS & urine test status.
  */
-function cspd_pseudofields_patient_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode, $langcode) {
+function cspd_pseudofields_patient_view(array &$build, $entity, $display, $view_mode, $langcode) {
   if ($display->getComponent('due_for_maps')) {
     $latest_maps = _get_nth_latest_unixtime_in_field($entity->get('field_maps')->getIterator());
 
@@ -96,6 +96,31 @@ function _get_nth_latest_unixtime_in_field(ArrayIterator $iterator, $nth = 0) {
   }
 
   return $sorted_unixtimes[$nth];
+}
+
+/**
+ * Implements hook_query_TAG_alter().
+ *
+ * Only include patients who haven't done their MAPS this year.
+ */
+function cspd_pseudofields_query_need_maps_alter(Drupal\Core\Database\Query\AlterableInterface $query) {
+  // For use in the second-latest query, find the most recent dates.
+  $latest = db_select('patient__field_maps', 'latest');
+  $latest
+    ->addField('latest', 'entity_id', 'id');
+  $latest
+    ->addExpression('MAX(latest.field_maps_value)', 'latestdate');
+  $latest
+    ->groupBy('id');
+
+  $query
+    ->leftJoin($latest, 'l', 'patient_field_data.id=l.id');
+
+  $notthisyear_or_null = $query->orConditionGroup()
+    ->condition('l.latestdate', date('Y') . '-01-01', '<')
+    ->isNull('l.latestdate');
+
+  $query->condition($notthisyear_or_null);
 }
 
 /**

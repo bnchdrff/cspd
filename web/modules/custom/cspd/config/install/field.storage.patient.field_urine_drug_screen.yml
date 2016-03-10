@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - eck
+_core:
+  default_config_hash: zHc2z_COPci2KLRZCk5uddckBapdnlwOb5fXDbG7PIk
+id: patient.field_urine_drug_screen
+field_name: field_urine_drug_screen
+entity_type: patient
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
