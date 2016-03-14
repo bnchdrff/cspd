@@ -38,11 +38,12 @@ content:
     third_party_settings: {  }
     type: datetime_default
   field_patient_number:
-    weight: 11
+    weight: 16
     settings:
+      size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: number
+    type: string_textfield
   field_urine_drug_screen:
     weight: 15
     settings: {  }
